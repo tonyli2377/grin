@@ -176,7 +176,9 @@ pub struct BlockHeader {
 	pub height: u64,
 	/// Hash of the block previous to this in the chain.
 	pub prev_hash: Hash,
-	/// Root hash of the header MMR at the previous header.
+	/// Root hash of the header MMR(Merkle Mountain Ranges) at the previous header.
+	/// Merkle Mountain Ranges are an alternative to Merkle trees.
+	/// https://github.com/mimblewimble/grin/blob/master/doc/mmr.md
 	pub prev_root: Hash,
 	/// Timestamp at which the block was built.
 	pub timestamp: DateTime<Utc>,

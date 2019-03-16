@@ -91,7 +91,7 @@ pub fn mine_genesis_block() -> Result<Block, Error> {
 pub fn pow_size(
 	bh: &mut BlockHeader,
 	diff: Difficulty,
-	proof_size: usize,
+	proof_size: usize,  // proof_size：就是Cuckoo-cycle proof size (cycle length)，默认值是42
 	sz: u8,
 ) -> Result<(), Error> {
 	let start_nonce = bh.pow.nonce;

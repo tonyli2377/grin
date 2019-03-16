@@ -108,21 +108,22 @@ where
 			core::core::Block::new(&prev, vec![], next_header_info.clone().difficulty, reward)
 				.unwrap();
 		b.header.timestamp = prev.timestamp + Duration::seconds(60);
-		b.header.pow.secondary_scaling = next_header_info.secondary_scaling;
+		b.header.pow.secondary_scaling = next_header_info.secondary_scaling; // 第二次PoW的难度扩展因子
 
 		chain.set_txhashset_roots(&mut b).unwrap();
 
 		let edge_bits = if n == 2 {
 			global::min_edge_bits() + 1
 		} else {
-			global::min_edge_bits()
+			global::min_edge_bits()  //Cuckatoo Cycle edge_bits（Size of the cuckoo graph）, used for mining and validating，默认值31
 		};
 		b.header.pow.proof.edge_bits = edge_bits;
+		// Runs a proof of work computation
 		pow::pow_size(
 			&mut b.header,
 			next_header_info.difficulty,
-			global::proofsize(),
-			edge_bits,
+			global::proofsize(), //Cuckoo-cycle proof size (cycle length),默认42
+			edge_bits, //Cuckatoo Cycle edge_bits（Size of the cuckoo graph）, used for mining and validating，默认值31
 		)
 		.unwrap();
 		b.header.pow.proof.edge_bits = edge_bits;

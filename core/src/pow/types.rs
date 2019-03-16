@@ -219,7 +219,7 @@ impl<'de> de::Visitor<'de> for DiffVisitor {
 pub struct ProofOfWork {
 	/// Total accumulated difficulty since genesis block
 	pub total_difficulty: Difficulty,
-	/// Variable difficulty scaling factor fo secondary proof of work
+	/// Variable difficulty scaling factor for secondary proof of work
 	pub secondary_scaling: u32,
 	/// Nonce increment used to mine this block.
 	pub nonce: u64,
